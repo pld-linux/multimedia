@@ -93,9 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults,%{_applnkdir}/Multimedia} \
 	$RPM_BUILD_ROOT/var/lib/cddb
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}/man1 install
-
-mv $RPM_BUILD_ROOT%{_libdir}/app-defaults/* $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	MANDIR=%{_mandir}/man1 \
+	DEFAULTDIR=%{_libdir}/X11/app-defaults
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xplaycd.desktop
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xmixer.desktop

@@ -37,15 +37,15 @@ card volume controller, or a file browser for use in shell scripts.
 %patch4 -p1
 
 %build
-make depend
-make RPM_OPT_FLAGS="$RPM_OPT_FLAGS" LIBOPTS=-L%{_libdir}
+%{__make} depend
+%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS" LIBOPTS=-L%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults} \
 	$RPM_BUILD_ROOT/var/lib/cddb/
 
-make install \
+%{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_bindir} \
 
 MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \

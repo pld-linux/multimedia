@@ -93,7 +93,7 @@ kabuk yorumlayýcýlarýnda kullanýlabilecek bir dosya tarayýcýsýdýr.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Multimedia,%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT/var/lib/cddb
 
 %{__make} install \
@@ -101,8 +101,8 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-default
 	MANDIR=%{_mandir}/man1 \
 	DEFAULTDIR=%{_libdir}/X11/app-defaults
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xplaycd.desktop
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xmixer.desktop
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE3} %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
@@ -113,6 +113,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 %attr(1777,root,root) %dir /var/lib/cddb
-%{_applnkdir}/Multimedia/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_libdir}/X11/app-defaults/*

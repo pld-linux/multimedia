@@ -1,0 +1,10 @@
+--- multimedia/XPlaycd/hardware.c.ewt	Fri Aug 22 13:16:07 1997
++++ multimedia/XPlaycd/hardware.c	Fri Aug 22 13:16:41 1997
+@@ -17,6 +17,7 @@
+ #include <sys/param.h>
+ #include <sys/stat.h>
+ #include <sys/time.h>
++#include <sys/ustat.h>
+ #include <mntent.h>
+ #ifdef linux
+ #include <linux/cdrom.h>

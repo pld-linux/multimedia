@@ -1,0 +1,19 @@
+*** multimedia/McTools/McResource.c~	Sun Nov  5 00:15:55 1995
+--- multimedia/McTools/McResource.c	Mon Jul 21 13:34:47 1997
+***************
+*** 69,75 ****
+  			 XrmOptionDescRec *DescTable, int DescSize) {
+    char dsn[256], dsc[256], *str_type[20], *displayname=NULL;
+    XrmValue value;
+!   XrmDatabase appDB;
+    Display *display = NULL;
+  
+    XrmInitialize();
+--- 69,75 ----
+  			 XrmOptionDescRec *DescTable, int DescSize) {
+    char dsn[256], dsc[256], *str_type[20], *displayname=NULL;
+    XrmValue value;
+!   XrmDatabase appDB = 0;
+    Display *display = NULL;
+  
+    XrmInitialize();

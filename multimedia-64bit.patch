@@ -1,0 +1,94 @@
+
+From zeus@jhu.edu Fri Aug 22 13:11:28 1997
+Date: Fri, 20 Jun 1997 08:19:45 -0400 (EDT)
+From: Jeff Odom <zeus@jhu.edu>
+To: ewt@redhat.com
+Subject: multimedia.rpm 64-bit cleaning
+
+Here are a few more patches for the multimedia set, fixing a couple of
+instances where long was assumed to be the length of int.  These patches
+make xplaycd seg. fault with an illegal instruction error under Alpha.
+
+Please let me know if I should be sending patches like these to someone
+else.
+
+Jeff Odom
+System Administrator
+The Johns Hopkins Krieger Mind/Brain Institute
+
+--- multimedia/XPlaycd/discid.c.old	Thu Jun 19 13:54:53 1997
++++ multimedia/XPlaycd/discid.c	Thu Jun 19 13:57:27 1997
+@@ -53,12 +53,12 @@
+  * Return:
+  *	The integer checksum.
+  */
+-static int prg_sum(unsigned long n) {
++static int prg_sum(unsigned int n) {
+   char	buf[12], *p;
+   int	ret = 0;
+ 
+   /* For backward compatibility this algorithm must not change */
+-  sprintf(buf, "%lu", n);
++  sprintf(buf, "%u", n);
+   for (p = buf; *p != '\0'; p++)
+     ret += (*p - '0');
+ 
+@@ -75,7 +75,7 @@
+  * Return:
+  *	The integer disc ID.
+  */
+-unsigned long get_discid(void) {
++unsigned int get_discid(void) {
+   int	i, t = 0, n = 0;
+   /* For backward compatibility this algorithm must not change */
+   for (i = 0; i < thiscd.ntracks; i++) {
+@@ -337,7 +337,7 @@
+       file = (unsigned char *)alloca((i=strlen(path))+10);
+       strcpy(file, path);
+       if (i && file[i-1]!='/') file[i++]='/';
+-      sprintf(&file[i],"%08lx", get_discid());
++      sprintf(&file[i],"%08x", get_discid());
+       McFree(path);
+     } else {
+       McError(app, "I don't know where to safe your stuff, since the\n"
+@@ -362,7 +362,7 @@
+     fprintf(f, "# Disc length: %d seconds\n", thiscd.length);
+     fputs("#\n",f);
+ 
+-    fprintf(f, "DISCID=%08lx\n", get_discid());
++    fprintf(f, "DISCID=%08x\n", get_discid());
+     if (!(c=thiscd.cdname)) c="";
+     fprintf(f, "DTITLE=%s\n", c);
+     for (i = 0; i < thiscd.ntracks; i++) {
+--- multimedia/XPlaycd/discid.h.old	Thu Jun 19 13:55:56 1997
++++ multimedia/XPlaycd/discid.h	Thu Jun 19 13:56:06 1997
+@@ -17,6 +17,6 @@
+  *
+  */
+ 
+-extern unsigned long get_discid(void);
++extern unsigned int get_discid(void);
+ extern unsigned char *read_db(void);
+ extern void write_db(unsigned char *file);
+--- multimedia/XPlaycd/editor.c.old	Thu Jun 19 13:58:12 1997
++++ multimedia/XPlaycd/editor.c	Thu Jun 19 13:58:26 1997
+@@ -56,7 +56,7 @@
+     sprintf(cmdbuf, "exec xmdb -edit %s -notify %d",
+ 	    currentFile, (int)(mainWindow->window));
+   else
+-    sprintf(cmdbuf, "exec xmdb -new %08lx -count %d -notify %d",
++    sprintf(cmdbuf, "exec xmdb -new %08x -count %d -notify %d",
+ 	    get_discid(), thiscd.ntracks, (int)(mainWindow->window));
+ 
+   cmdline[0]="sh";
+--- multimedia/XPlaycd/xplaycd.c.old	Thu Jun 19 16:36:53 1997
++++ multimedia/XPlaycd/xplaycd.c	Thu Jun 19 16:35:13 1997
+@@ -505,7 +505,7 @@
+       if ((event->xclient.format == 32) &&
+ 	  (event->xclient.data.l[0] == XA_NOTICE) &&
+ 	  (event->xclient.data.l[1] == editor_pid)) {
+-	switch(event->xclient.data.l[2]) {
++	switch((int) event->xclient.data.l[2]) {
+ 	case XMDB_FILE_WRITTEN:
+ 	  update_db(1);
+ 	  break;

@@ -1,0 +1,11 @@
+--- multimedia/XPlaycd/scsi.c.ewt	Wed Dec 11 18:33:59 1996
++++ multimedia/XPlaycd/scsi.c	Wed Dec 11 18:34:03 1996
+@@ -27,7 +27,7 @@
+ #include <unistd.h>
+ #include <errno.h>
+ #include <string.h>
+-#include <linux/scsi.h>
++#include <scsi/scsi.h>
+ 
+ #include "struct.h"
+ #include "cd.h"

@@ -1,0 +1,79 @@
+--- multimedia/XMdb/XMdb.ewt	Wed Dec 11 18:27:57 1996
++++ multimedia/XMdb/XMdb	Wed Dec 11 18:27:57 1996
+@@ -0,0 +1,20 @@
++! This program is free software; you can redistribute it and/or modify
++! it under the terms of the GNU General Public License as published by
++! the Free Software Foundation; either version 2 of the License, or
++! (at your option) any later version.
++!
++! This program is distributed in the hope that it will be useful,
++! but WITHOUT ANY WARRANTY; without even the implied warranty of
++! MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++! GNU General Public License for more details.
++!
++! You should have received a copy of the GNU General Public License
++! along with this program; if not, write to the Free Software
++! Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++!
++
++! The path where xplaycd expects the database. XPlaycd searches this
++! directory and all subdirectories of it.
++! You are encouraged to change this to some place where you have write access.
++!
++*cddb:		/var/lib/cddb
+--- multimedia/Makefile.ewt	Wed Dec 11 18:28:13 1996
++++ multimedia/Makefile	Wed Dec 11 18:27:57 1996
+@@ -51,7 +51,7 @@
+ LIBDIR       = /usr/local/lib
+ 
+ MKDIR        = mkdirhier
+-HOSTOPTS     = -Dlinux -DHAS_GLOB
++HOSTOPTS     = $(RPM_OPT_FLAGS) -Dlinux -DHAS_GLOB
+ AR           = ar rcs
+ RANLIB       =
+ CEXTRA       =
+@@ -100,27 +100,27 @@
+ xplaycd:: $(DEPEND)
+ 	cd XPlaycd; make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'
+ 	if [ -f XPlaycd/xplaycd ]; then mv XPlaycd/xplaycd . ; fi
+-	sync
++	#sync
+ 
+ xmixer:: $(DEPEND)
+ 	cd XMixer;  make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'
+ 	if [ -f XMixer/xmixer ];   then mv XMixer/xmixer .   ; fi
+-	sync
++	#sync
+ 
+ xgetfile:: $(DEPEND)
+ 	cd XGetFile;  make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'
+ 	if [ -f XGetFile/xgetfile ];   then mv XGetFile/xgetfile .   ; fi
+-	sync
++	#sync
+ 
+ xmdb:: $(DEPEND)
+ 	cd XMdb;  make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'
+ 	if [ -f XMdb/xmdb ];   then mv XMdb/xmdb .   ; fi
+-	sync
++	#sync
+ 
+ xg3:: $(DEPEND)
+ 	cd XG3;  make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'
+ 	if [ -f XG3/xg3 ];   then mv XG3/xg3 .   ; fi
+-	sync
++	#sync
+ 
+ custom:: $(DEPEND)
+ 	cd $(CUSTOM);  make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'
+@@ -165,9 +165,11 @@
+ endif
+ 	install -s -o root -m 755 xplaycd xmixer xgetfile xmdb xg3 $(BINDIR)
+ 	install -o root -m 644 XPlaycd/XPlaycd            $(DEFAULTDIR)
++	install -o root -m 644 XMdb/XMdb                  $(DEFAULTDIR)
+ 	install -o root -m 644 XPlaycd/xplaycd.1          $(MANDIR)
+ 	install -o root -m 644 XMixer/XMixer              $(DEFAULTDIR)
+ 	install -o root -m 644 XMixer/xmixer.1            $(MANDIR)
++	install -c -o root -m 644 XGetFile/XGetfile       $(DEFAULTDIR)
+ 	install -o root -m 644 XGetFile/xgetfile.1        $(MANDIR)
+ 
+ dist::

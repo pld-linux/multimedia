@@ -1,0 +1,4 @@
+xmixer name "XMixer"
+xmixer description "Sound Card Mixer"
+xmixer exec "xmixer &"
+xmixer group Utilities/Sound

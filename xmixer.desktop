@@ -3,6 +3,7 @@ Name=XMixer
 Comment=Sound Card Mixer
 Comment[pl]=Mikser karty dźwiękowej
 Comment[sv]=Ljudkortsmixerpanel
+Icon=xmixer.png
 Exec=xmixer
 Terminal=0
 Type=Application

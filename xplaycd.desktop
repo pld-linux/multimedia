@@ -3,6 +3,7 @@ Name=XPlayCD
 Comment=CD Player
 Comment[pl]=Odtwarzacz CD
 Comment[sv]=CD-spelare
+Icon=xplaycd.png
 Exec=xplaycd
 Terminal=0
 Type=Application

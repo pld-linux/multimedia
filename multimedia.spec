@@ -7,7 +7,7 @@ Summary(pt_BR):	Um CD player e mixador de áudio para X11
 Summary(tr):	X11 için CD çalýcý ve ses mikseri
 Name:		multimedia
 Version:	2.1
-Release:	23
+Release:	24
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
@@ -95,6 +95,8 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-default
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}/man1 install
 
+mv $RPM_BUILD_ROOT%{_libdir}/app-defaults/* $RPM_BUILD_ROOT%{_libdir}/X11/app-defaults/
+
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xplaycd.desktop
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xmixer.desktop
 
@@ -107,4 +109,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %attr(1777,root,root) %dir /var/lib/cddb
 %{_applnkdir}/Multimedia/*
-%{_libdir}/app-defaults/*
+%{_libdir}/X11/app-defaults/*

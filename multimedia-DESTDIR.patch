@@ -1,0 +1,54 @@
+--- ./Makefile.org	Fri Dec  7 00:36:23 2001
++++ ./Makefile	Fri Dec  7 00:43:34 2001
+@@ -45,10 +45,11 @@
+ #
+ 
+ #BUILD_SHARED = YES
+-BINDIR       = /usr/local/bin
+-DEFAULTDIR   = /usr/lib/X11/app-defaults
+-MANDIR       = /usr/local/man/man1
+-LIBDIR       = /usr/local/lib
++PREFIX		= /usr/X11R6
++BINDIR       = $(PREFIX)/bin
++DEFAULTDIR   = $(PREFIX)/lib/app-defaults
++MANDIR       = /usr/share/man/man1
++LIBDIR       = $(PREFIX)/lib
+ 
+ MKDIR        = mkdirhier
+ HOSTOPTS     = $(RPM_OPT_FLAGS) -Dlinux -DHAS_GLOB
+@@ -155,22 +156,22 @@
+ 	touch .depend
+ 
+ install:
+-	-$(MKDIR) $(BINDIR)
+-	-$(MKDIR) $(DEFAULTDIR)
+-	-$(MKDIR) $(MANDIR)
++	-$(MKDIR) $(DESTDIR)$(BINDIR)
++	-$(MKDIR) $(DESTDIR)$(DEFAULTDIR)
++	-$(MKDIR) $(DESTDIR)$(MANDIR)
+ ifeq ($(BUILD_SHARED),YES)
+-	$(MKDIR) $(LIBDIR)
+-	install -o root -m 755 McTools/libMcTools.so $(LIBDIR)/libMcTools.so.1
++	$(MKDIR) $(DESTDIR)$(LIBDIR)
++	install -m 755 McTools/libMcTools.so $(DESTDIR)$(LIBDIR)/libMcTools.so.1
+ 	ldconfig
+ endif
+-	install -s -o root -m 755 xplaycd xmixer xgetfile xmdb xg3 $(BINDIR)
+-	install -o root -m 644 XPlaycd/XPlaycd            $(DEFAULTDIR)
+-	install -o root -m 644 XMdb/XMdb                  $(DEFAULTDIR)
+-	install -o root -m 644 XPlaycd/xplaycd.1          $(MANDIR)
+-	install -o root -m 644 XMixer/XMixer              $(DEFAULTDIR)
+-	install -o root -m 644 XMixer/xmixer.1            $(MANDIR)
+-	install -c -o root -m 644 XGetFile/XGetfile       $(DEFAULTDIR)
+-	install -o root -m 644 XGetFile/xgetfile.1        $(MANDIR)
++	install -s -m 755 xplaycd xmixer xgetfile xmdb xg3 $(DESTDIR)$(BINDIR)
++	install -m 644 XPlaycd/XPlaycd            $(DESTDIR)$(DEFAULTDIR)
++	install -m 644 XMdb/XMdb                  $(DESTDIR)$(DEFAULTDIR)
++	install -m 644 XPlaycd/xplaycd.1          $(DESTDIR)$(MANDIR)
++	install -m 644 XMixer/XMixer              $(DESTDIR)$(DEFAULTDIR)
++	install -m 644 XMixer/xmixer.1            $(DESTDIR)$(MANDIR)
++	install -c -m 644 XGetFile/XGetfile       $(DESTDIR)$(DEFAULTDIR)
++	install -m 644 XGetFile/xgetfile.1        $(DESTDIR)$(MANDIR)
+ 
+ dist::
+ 	(cd ..; tar cvzf multimedia.tar.gz multimedia/[A-Z]* multimedia/[a-z]*)

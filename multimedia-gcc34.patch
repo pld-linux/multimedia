@@ -1,0 +1,29 @@
+--- multimedia/McTools/McApp.c.orig	1996-05-28 20:38:52.000000000 +0200
++++ multimedia/McTools/McApp.c	2004-04-26 12:52:59.264982192 +0200
+@@ -24,7 +24,7 @@
+ #include <time.h>
+ #include <string.h>
+ #include "McAlloc.h"
+-#include <varargs.h>
++#include <stdarg.h>
+ 
+ #include "McColors.h"
+ #include "McApp.h"
+--- multimedia/XG3/files.c.orig	1996-05-28 21:15:30.000000000 +0200
++++ multimedia/XG3/files.c	2004-04-26 12:57:59.410353160 +0200
+@@ -89,6 +89,7 @@
+   new_fax_data(newdata, st.st_size);
+ 
+ fail:
++;
+ }
+ 
+ /****************************************************************************/
+@@ -110,6 +111,7 @@
+   fclose(fp);
+ 
+ fail:
++;
+ }
+ 
+ /****************************************************************************/

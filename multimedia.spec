@@ -8,8 +8,8 @@ Group:		X11/Applications/Multimedia
 Group(de):	X11/Applikationen/Multimedia
 Group(pl):	X11/Aplikacje/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
-Source1:	xplaycd.wmconfig
-Source2:	xmixer.wmconfig
+Source1:	xplaycd.desktop
+Source2:	xmixer.desktop
 Patch0:		%{name}-2.1-misc.patch
 Patch1:		%{name}-2.1-scsi.patch
 Patch2:		%{name}-2.1-res.patch
@@ -30,6 +30,14 @@ a versatile file browser, intended for use in shell scripts.
 Install the multimedia package if you need an audio CD player, a sound
 card volume controller, or a file browser for use in shell scripts.
 
+%description -l pl
+Ten pakiet zawiera kilka narzêdzi dla X Window System do obs³ugi
+plików multimedialnych: xplaycd, xmixer i xgetfile. xplaycd jest
+odtwarzaczem p³yt CD Audio przy u¿yciu napêdu CD-ROM. xmixer
+kontroluje ustawienia g³o¶no¶ci na karcie d¼wiêkowej. xgetfile jest
+wszechstronn± przegl±dark± plików, króra ma byæ u¿ywana w skryptach
+pow³oki.
+
 %prep
 %setup -q -n multimedia
 %patch -p1
@@ -40,32 +48,30 @@ card volume controller, or a file browser for use in shell scripts.
 
 %build
 %{__make} depend
-%{__make} RPM_OPT_FLAGS="%{rpmcflags}" LIBOPTS=-L%{_libdir}
+%{__make} RPM_OPT_FLAGS="%{rpmcflags}" LIBOPTS="-L%{_libdir}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults} \
-	$RPM_BUILD_ROOT/var/lib/cddb/
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults,%{_applnkdir}/Multimedia} \
+	$RPM_BUILD_ROOT/var/lib/cddb
 
 %{__make} install \
 	BINDIR=$RPM_BUILD_ROOT%{_bindir} \
-
-MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
+	MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	DEFAULTDIR=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir} \
 	MKDIR="install -d"
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xplaycd
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xmixer
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xplaycd.desktop
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xmixer.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_sysconfdir}/X11/wmconfig/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
-%attr(1777,root,root) %dir /var/lib/cddb/ 
-
+%attr(1777,root,root) %dir /var/lib/cddb
+%{_applnkdir}/Multimedia/*
 %{_libdir}/X11/app-defaults/*

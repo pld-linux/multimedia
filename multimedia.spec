@@ -7,12 +7,14 @@ Summary(pt_BR):	Um CD player e mixador de áudio para X11
 Summary(tr):	X11 için CD çalýcý ve ses mikseri
 Name:		multimedia
 Version:	2.1
-Release:	24
+Release:	25
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
 Source1:	xplaycd.desktop
 Source2:	xmixer.desktop
+Source3:	xplaycd.png
+Source4:	xmixer.png
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-scsi.patch
 Patch2:		%{name}-res.patch
@@ -91,7 +93,8 @@ kabuk yorumlayýcýlarýnda kullanýlabilecek bir dosya tarayýcýsýdýr.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults,%{_applnkdir}/Multimedia} \
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults} \
+	$RPM_BUILD_ROOT{%{_applnkdir}/Multimedia,%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT/var/lib/cddb
 
 %{__make} install \
@@ -101,6 +104,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-default
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xplaycd.desktop
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xmixer.desktop
+install %{SOURCE3} %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -111,4 +115,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %attr(1777,root,root) %dir /var/lib/cddb
 %{_applnkdir}/Multimedia/*
+%{_pixmapsdir}/*.png
 %{_libdir}/X11/app-defaults/*

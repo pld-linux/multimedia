@@ -1,0 +1,11 @@
+--- multimedia/XPlaycd/discid.c.foo	Sat Jun 10 15:40:19 2000
++++ multimedia/XPlaycd/discid.c	Sat Jun 10 15:42:25 2000
+@@ -299,7 +299,7 @@
+   while ((p=strchr(p2, '/'))) {
+     *p=0;
+     if (stat(path, &st)) {
+-      if (mkdir(path, 0755 & umsk)) {
++      if (mkdir(path, 0755)) {
+ 	McError(app, "Can't create directory '%s'\nReason: %s\n",
+ 		path,strerror(errno));
+ 	*p='/';

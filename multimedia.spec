@@ -60,7 +60,7 @@ Ten pakiet zawiera kilka narzêdzi dla X Window System do obs³ugi
 plików multimedialnych: xplaycd, xmixer i xgetfile. xplaycd jest
 odtwarzaczem p³yt CD Audio przy u¿yciu napêdu CD-ROM. xmixer
 kontroluje ustawienia g³o¶no¶ci na karcie d¼wiêkowej. xgetfile jest
-wszechstronn± przegl±dark± plików, króra ma byæ u¿ywana w skryptach
+wszechstronn± przegl±dark± plików, która ma byæ u¿ywana w skryptach
 pow³oki.
 
 %description -l pt_BR

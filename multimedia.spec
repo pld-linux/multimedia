@@ -12,7 +12,7 @@ Patch1: multimedia-2.1-scsi.patch
 Patch2: multimedia-2.1-res.patch
 Patch3: multimedia-2.1-64bit.patch
 Patch4: multimedia-2.1-ustat.patch
-Buildroot: /var/tmp/multimedia-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The multimedia package contains several X Window System utilities

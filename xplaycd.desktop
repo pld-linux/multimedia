@@ -8,5 +8,5 @@ Icon=xplaycd.png
 Exec=xplaycd
 Terminal=false
 Type=Application
-Categories=AudioVideo
+Categories=AudioVideo;
 # vi: encoding=utf-8

@@ -1,8 +1,13 @@
 Summary:	Several X utilities mainly for use with multimedia files
 Summary(pl):	Ró¿ne narzêdzia pod X g³ównie do obs³ugi plików multimedialnych
+Summary(de):	Ein CD-Player und Audio-Mixer für X11
+Summary(fr):	Un lecteur CD audio et un mixer pour X11.
+Summary(tr):	X11 için CD çalýcý ve ses mikseri
+Summary(pt_BR):	Um CD player e mixador de áudio para X11
+Summary(es):	Un CD player y mezclador de audio para X11
 Name:		multimedia
 Version:	2.1
-Release:	15
+Release:	16
 License:	GPL
 Group:		X11/Applications/Multimedia
 Group(de):	X11/Applikationen/Multimedia
@@ -15,6 +20,8 @@ Patch1:		%{name}-2.1-scsi.patch
 Patch2:		%{name}-2.1-res.patch
 Patch3:		%{name}-2.1-64bit.patch
 Patch4:		%{name}-2.1-ustat.patch
+Patch5:		%{name}-DESTDIR.patch
+URL:		http://metalab.unc.edu/pub/Linux/apps/sound/suites/!INDEX.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -38,6 +45,37 @@ kontroluje ustawienia g³o¶no¶ci na karcie d¼wiêkowej. xgetfile jest
 wszechstronn± przegl±dark± plików, króra ma byæ u¿ywana w skryptach
 pow³oki.
 
+%description -l de
+Dieses Paket enthält Xplaycd, Xmixer und Xgetfile. Xplaycd ist
+ein Programm zum Abspielen von Audio-CDs im CD-ROM-Laufwerk. Xmixer
+dient zur Steuerung des Mixers auf einer Soundkarte, und Xgetfile
+ist ein Allround-Datei-Browser zur Benutzung in Shell-Skripts.
+
+%description -l fr
+Ce paquetage contient XPlaycd, XMixer et XGetfile. XPlaycd est un programme pour
+lire des CDs audio en utilisant le lecteur de CD-ROM. XMixer sert à commander le
+mixer d'une carte son. XGetfile est un navigateur de fichier, créé pour être
+utilisé dans des scripts shell.
+
+%description -l tr
+Bu paket XPlaycd, XMixer ve XGetfile programlarýný içerir. XPlaycd, cdrom
+sürücü yoluyla ses cdlerini çalan bir programdýr. XMixer, ses kartý
+üzerindeki mikserin kontrol edilmesini saðlar. XGetfile ise kabuk
+yorumlayýcýlarýnda kullanýlabilecek bir dosya tarayýcýsýdýr.
+
+%description -l pt_BR
+Este pacote contém XPlaycd, XMixer e XGetfile. XPlaycd é um programa
+para tocar cds de áudio usando o drive de cdrom. XMixer é usado
+para controlar a mixagem na placa de som. XGetfile é um versátil
+navegador de arquivo, feito para usar em shell scripts.
+
+%description -l es
+Este paquete contiene XPlaycd, XMixer y XGetfile. XPlaycd es
+un programa para reproducir cds de audio usando el drive de
+cdrom. XMixer se usa para controlar las mezclas en la tarjeta de
+sonido. XGetfile es un versátil navegador de archivo, hecho para
+usar en shell scripts.
+
 %prep
 %setup -q -n multimedia
 %patch -p1
@@ -45,6 +83,7 @@ pow³oki.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__make} depend
@@ -55,12 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults,%{_applnkdir}/Multimedia} \
 	$RPM_BUILD_ROOT/var/lib/cddb
 
-%{__make} install \
-	BINDIR=$RPM_BUILD_ROOT%{_bindir} \
-	MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
-	DEFAULTDIR=$RPM_BUILD_ROOT%{_libdir}/X11/app-defaults \
-	LIBDIR=$RPM_BUILD_ROOT%{_libdir} \
-	MKDIR="install -d"
+%{__make} DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}/man1 install
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xplaycd.desktop
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia/xmixer.desktop
@@ -74,4 +108,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %attr(1777,root,root) %dir /var/lib/cddb
 %{_applnkdir}/Multimedia/*
-%{_libdir}/X11/app-defaults/*
+%{_libdir}/app-defaults/*

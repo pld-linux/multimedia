@@ -10,8 +10,6 @@ Version:	2.1
 Release:	23
 License:	GPL
 Group:		X11/Applications/Multimedia
-Group(de):	X11/Applikationen/Multimedia
-Group(pl):	X11/Aplikacje/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
 Source1:	xplaycd.desktop
 Source2:	xmixer.desktop

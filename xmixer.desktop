@@ -8,5 +8,5 @@ Exec=xmixer
 Terminal=false
 Type=Application
 Encoding=UTF-8
-Categories=AudioVideo;
+Categories=AudioVideo;mixer;
 # vi: encoding=utf-8

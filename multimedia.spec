@@ -28,7 +28,7 @@ BuildRequires:	XFree86-devel
 URL:		http://metalab.unc.edu/pub/Linux/apps/sound/suites/!INDEX.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdefsdir	%{_prefix}/X11R6/%{_lib}/X11/app-defaults
+%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
 
 %description
 The multimedia package contains several X Window System utilities for

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=XMixer
+Comment=Sound Card Mixer
+Exec=xmixer
+Terminal=0
+Type=Application
+# vi: encoding=utf-8

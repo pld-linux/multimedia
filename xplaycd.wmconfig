@@ -1,4 +1,0 @@
-xplaycd name "XPlayCD"
-xplaycd description "CD Player"
-xplaycd exec "xplaycd &"
-xplaycd group Utilities/Sound

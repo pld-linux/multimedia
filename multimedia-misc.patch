@@ -23,15 +23,6 @@
 +*cddb:		/var/lib/cddb
 --- multimedia/Makefile.ewt	Wed Dec 11 18:28:13 1996
 +++ multimedia/Makefile	Wed Dec 11 18:27:57 1996
-@@ -51,7 +51,7 @@
- LIBDIR       = /usr/local/lib
- 
- MKDIR        = mkdirhier
--HOSTOPTS     = -Dlinux -DHAS_GLOB
-+HOSTOPTS     = $(RPM_OPT_FLAGS) -Dlinux -DHAS_GLOB
- AR           = ar rcs
- RANLIB       =
- CEXTRA       =
 @@ -100,27 +100,27 @@
  xplaycd:: $(DEPEND)
  	cd XPlaycd; make COPTS='$(COPTS) $(CGLOBAL) $(RC5OPTS)' CC='$(CC)' LDOPTS='$(LDOPTS)' XLIBS='$(XLIBS) $(LGLOBAL)' LIBOPTS='$(LIBOPTS)'

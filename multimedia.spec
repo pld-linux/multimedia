@@ -11,7 +11,7 @@ Release:	26
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
-# Source0-md5: db7f5b0aafaf92425ed18a3f99af9150
+# Source0-md5:	db7f5b0aafaf92425ed18a3f99af9150
 Source1:	xplaycd.desktop
 Source2:	xmixer.desktop
 Source3:	xplaycd.png

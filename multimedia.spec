@@ -1,18 +1,20 @@
-Summary:	Several X utilities mainly for use with multimedia files.
+Summary:	Several X utilities mainly for use with multimedia files
+Summary(pl):	Ró¿ne narzêdzia pod X g³ównie do obs³ugi plików multimedialnych
 Name:		multimedia
 Version:	2.1
 Release:	15
 License:	GPL
 Group:		X11/Applications/Multimedia
+Group(de):	X11/Applikationen/Multimedia
 Group(pl):	X11/Aplikacje/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
 Source1:	xplaycd.wmconfig
 Source2:	xmixer.wmconfig
-Patch0:		multimedia-2.1-misc.patch
-Patch1:		multimedia-2.1-scsi.patch
-Patch2:		multimedia-2.1-res.patch
-Patch3:		multimedia-2.1-64bit.patch
-Patch4:		multimedia-2.1-ustat.patch
+Patch0:		%{name}-2.1-misc.patch
+Patch1:		%{name}-2.1-scsi.patch
+Patch2:		%{name}-2.1-res.patch
+Patch3:		%{name}-2.1-64bit.patch
+Patch4:		%{name}-2.1-ustat.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -38,7 +40,7 @@ card volume controller, or a file browser for use in shell scripts.
 
 %build
 %{__make} depend
-%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS" LIBOPTS=-L%{_libdir}
+%{__make} RPM_OPT_FLAGS="%{rpmcflags}" LIBOPTS=-L%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -53,11 +55,8 @@ MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir} \
 	MKDIR="install -d"
 
-strip $RPM_BUILD_ROOT%{_bindir}/*
-install $RPM_SOURCE_DIR/xplaycd.wmconfig \
-$RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xplaycd
-install $RPM_SOURCE_DIR/xmixer.wmconfig \
-$RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xmixer
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xplaycd
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/wmconfig/xmixer
 
 %clean
 rm -rf $RPM_BUILD_ROOT

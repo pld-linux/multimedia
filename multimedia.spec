@@ -7,7 +7,7 @@ Summary(pt_BR):	Um CD player e mixador de áudio para X11
 Summary(tr):	X11 için CD çalýcý ve ses mikseri
 Name:		multimedia
 Version:	2.1
-Release:	25
+Release:	26
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	ftp://sunsite.unc.edu/pub/Linux/apps/sound/suites/%{name}-%{version}.tar.gz
@@ -23,10 +23,12 @@ Patch3:		%{name}-64bit.patch
 Patch4:		%{name}-ustat.patch
 Patch5:		%{name}-DESTDIR.patch
 Patch6:		%{name}-umask.patch
+Patch7:		%{name}-gcc34.patch
 BuildRequires:	XFree86-devel
 URL:		http://metalab.unc.edu/pub/Linux/apps/sound/suites/!INDEX.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_appdefsdir	%{_prefix}/X11R6/%{_lib}/X11/app-defaults
 
 %description
 The multimedia package contains several X Window System utilities for
@@ -82,24 +84,24 @@ kabuk yorumlayýcýlarýnda kullanýlabilecek bir dosya tarayýcýsýdýr.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 %{__make} depend
 %{__make} \
 	CC=%{__cc} \
-	OPTIMIZE="%{rpmcflags}" \
-	LIBOPTS="-L%{_libdir}"
+	OPTIMIZE="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir}/X11/app-defaults} \
-	$RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT/var/lib/cddb
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	PREFIX=%{_prefix} \
 	MANDIR=%{_mandir}/man1 \
-	DEFAULTDIR=%{_libdir}/X11/app-defaults
+	DEFAULTDIR=%{_appdefsdir}
+
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lib/cddb}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
@@ -115,4 +117,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(1777,root,root) %dir /var/lib/cddb
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
-%{_libdir}/X11/app-defaults/*
+%{_appdefsdir}/*

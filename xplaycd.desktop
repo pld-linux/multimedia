@@ -5,6 +5,6 @@ Comment[pl]=Odtwarzacz CD
 Comment[sv]=CD-spelare
 Icon=xplaycd.png
 Exec=xplaycd
-Terminal=0
+Terminal=false
 Type=Application
 # vi: encoding=utf-8

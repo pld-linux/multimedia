@@ -20,6 +20,7 @@ Patch3:		%{name}-64bit.patch
 Patch4:		%{name}-ustat.patch
 Patch5:		%{name}-DESTDIR.patch
 Patch6:		%{name}-umask.patch
+BuildRequires:	XFree86-devel
 URL:		http://metalab.unc.edu/pub/Linux/apps/sound/suites/!INDEX.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

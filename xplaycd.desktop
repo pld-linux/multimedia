@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=XPlayCD
 Comment=CD Player
+Comment[sv]=CD-spelare
 Exec=xplaycd
 Terminal=0
 Type=Application

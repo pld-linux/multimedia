@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=XMixer
 Comment=Sound Card Mixer
+omment[sv]=Ljudkortsmixerpanel
 Exec=xmixer
 Terminal=0
 Type=Application

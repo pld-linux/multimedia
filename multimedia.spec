@@ -89,7 +89,7 @@ kabuk yorumlayýcýlarýnda kullanýlabilecek bir dosya tarayýcýsýdýr.
 %build
 %{__make} depend
 %{__make} \
-	CC=%{__cc} \
+	CC="%{__cc}" \
 	OPTIMIZE="%{rpmcflags}"
 
 %install

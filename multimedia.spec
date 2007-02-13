@@ -1,10 +1,10 @@
 Summary:	Several X utilities mainly for use with multimedia files
-Summary(de.UTF-8):   Ein CD-Player und Audio-Mixer für X11
-Summary(es.UTF-8):   Un CD player y mezclador de audio para X11
-Summary(fr.UTF-8):   Un lecteur CD audio et un mixer pour X11
-Summary(pl.UTF-8):   Różne narzędzia pod X głównie do obsługi plików multimedialnych
-Summary(pt_BR.UTF-8):   Um CD player e mixador de áudio para X11
-Summary(tr.UTF-8):   X11 için CD çalıcı ve ses mikseri
+Summary(de.UTF-8):	Ein CD-Player und Audio-Mixer für X11
+Summary(es.UTF-8):	Un CD player y mezclador de audio para X11
+Summary(fr.UTF-8):	Un lecteur CD audio et un mixer pour X11
+Summary(pl.UTF-8):	Różne narzędzia pod X głównie do obsługi plików multimedialnych
+Summary(pt_BR.UTF-8):	Um CD player e mixador de áudio para X11
+Summary(tr.UTF-8):	X11 için CD çalıcı ve ses mikseri
 Name:		multimedia
 Version:	2.1
 Release:	26

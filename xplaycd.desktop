@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=XPlayCD
 Comment=CD Player
 Comment[pl]=Odtwarzacz CD
 Comment[sv]=CD-spelare
-Icon=xplaycd.png
+Icon=xplaycd
 Exec=xplaycd
 Terminal=false
 Type=Application
